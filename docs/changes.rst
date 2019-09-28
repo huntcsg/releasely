@@ -1,3 +1,11 @@
+.. _v0.1.3:
+
+-------------------
+v0.1.3 - 2019-09-28
+-------------------
+
+Fixed bug in prepare_release that caused it to not push tags
+
 .. _v0.1.2:
 
 -------------------
