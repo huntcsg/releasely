@@ -27,4 +27,11 @@ def prepare_default_branch():
     releasely.git.commit(f'Cut Release and Updated changelog: v{current_version} -> v{new_version}')
     releasely.git.tag(f'v{new_version}')
     release_branch_name = 'release-v{}.{}'.format(version_data['major'], version_data['minor'])
+
     releasely.git.get_or_create_branch(release_branch_name)
+    releasely.git.push(release_branch_name)
+    releasely.git.push_tag(f'v{new_version}')
+
+    releasely.git.checkout('master')
+    releasely.git.push('master')
+

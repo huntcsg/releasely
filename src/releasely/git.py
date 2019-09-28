@@ -9,6 +9,14 @@ def delete(filepath):
     return subprocess.check_output(['git', 'rm', filepath]).decode('utf-8').strip()
 
 
+def checkout(branch):
+    return subprocess.check_output(['git', 'checkout', branch]).decode('utf-8').strip()
+
+
+def push(ref):
+    return subprocess.check_output(['git', 'push', 'origin', ref])
+
+
 def commit(message):
     return subprocess.check_output(['git', 'commit', '-m', message]).decode('utf-8').strip()
 
