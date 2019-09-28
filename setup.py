@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='releasely',
-    version='0.1.3',
+    version='0.2.0',
     package_dir={
         '': 'src',
     },
