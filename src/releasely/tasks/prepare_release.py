@@ -46,8 +46,13 @@ def prepare_release_branch():
 
     if release_type != releasely.release_info.PATCH:
         logging.warning('Only patch releases are allowed on release branches.')
+        return
 
     # Check if we should use master instead
+    if releasely.git.shared_head_with_ref('master'):
+        logging.warning('This change appears to have been made on the wrong branch. You should make this change on the master branch.')
+        return
+
     current_version = releasely.version.get_current_version()
     new_version = releasely.version.get_new_version(release_type)
     version_data = releasely.version.parse_version(new_version)

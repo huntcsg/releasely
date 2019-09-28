@@ -1,4 +1,5 @@
 import subprocess
+import collections
 
 
 def add(*files):
@@ -15,6 +16,33 @@ def checkout(branch):
 
 def push(ref):
     return subprocess.check_output(['git', 'push', 'origin', ref])
+
+
+def get_refs_by_commit():
+    output = subprocess.check_output(['git', 'show-ref', '--head', '--heads']).decode('utf-8').strip()
+    refs_by_commit = collections.defaultdict(set)
+    for line in output.split('\n'):
+        commit, ref = line.split(' ')
+        refs_by_commit[commit].add(ref)
+    return refs_by_commit
+
+def fetch():
+    return subprocess.check_output(['git', 'fetch'])
+
+
+def show_ref(ref, remote='origin'):
+    if remote:
+        ref = '{}/{}'.format(remote, ref)
+
+    return subprocess.check_output(['git', 'show-ref', ref]).decode('utf-8').strip().split(' ')[0]
+
+
+def shared_head_with_ref(reference_ref='master'):
+    fetch()
+    branch = rev_parse('HEAD')
+    remote_branch_ref = show_ref(branch, remote='origin')
+    master_ref = show_ref(reference_ref, remote='origin')
+    return remote_branch_ref == master_ref
 
 
 def commit(message):
