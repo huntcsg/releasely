@@ -30,7 +30,7 @@ def prepare_default_branch():
 
     releasely.git.get_or_create_branch(release_branch_name)
     releasely.git.push(release_branch_name)
-    releasely.git.push_tag(f'v{new_version}')
+    releasely.git.push(f'v{new_version}')
 
     releasely.git.checkout('master')
     releasely.git.push('master')
