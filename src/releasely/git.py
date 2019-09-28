@@ -45,13 +45,14 @@ def add_tracked():
 
 def get_or_create_branch(name):
     branches = subprocess.check_output(['git', 'branch']).decode('utf-8').strip()
-    for branch in branches:
-        if branch.strip() == name:
+    for branch in branches.split('\n'):
+        if branch.strip().strip('*').strip() == name:
             subprocess.check_output(['git', 'checkout', name])
+            break
     else:
         subprocess.check_output(['git', 'checkout', '-b', name]).decode('utf-8').strip()
 
-        subprocess.check_output(['git', 'merge', 'master', '--ff-only'])
+    subprocess.check_output(['git', 'merge', 'master', '--ff-only'])
 
 
 def file_tracked(filepath):
