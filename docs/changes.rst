@@ -1,3 +1,18 @@
+.. _v0.2.3:
+
+-------------------
+v0.2.3 - 2019-10-18
+-------------------
+
+* Updated cli using argparse to have help and documented options.
+* Enabled better logging options and began to log around the app.
+* Added a check command to the cli
+* Updated .gitignore with typical project files
+
+Authors:
+
+* Hunter Senft-Grupp
+
 .. _v0.2.2:
 
 -------------------
