@@ -115,8 +115,9 @@ def get_remote():
     return config["repo"]["remote"]
 
 
-def get_or_create_branch(name):
-    default_branch = get_default_branch()
+def get_or_create_branch(name, reference=None):
+    if reference is None:
+        reference = get_default_branch()
     branches = subprocess.check_output(["git", "branch"]).decode("utf-8").strip()
     for branch in branches.split("\n"):
         if branch.strip().strip("*").strip() == name:
@@ -125,7 +126,7 @@ def get_or_create_branch(name):
     else:
         subprocess.check_output(["git", "checkout", "-b", name]).decode("utf-8").strip()
 
-    subprocess.check_output(["git", "merge", default_branch, "--ff-only"])
+    subprocess.check_output(["git", "merge", reference, "--ff-only"])
 
 
 def file_tracked(filepath):
