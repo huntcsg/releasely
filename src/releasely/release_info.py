@@ -1,22 +1,37 @@
-import re
-from releasely.config import load_project_config
-import os
 import datetime
+import re
+import textwrap
+
+from releasely.config import load_project_config
 from releasely.git import file_tracked
 
+DEFAULT_BLANK_MESSAGE = "< PUT RELEASE NOTES HERE >"
+
+template = textwrap.dedent(
+    """\
+RELEASE_TYPE: {release_type}
+
+{message}
+
+Authors:
+
+* {author}
+
+"""
+)
 
 RELEASE_TYPE = re.compile(r"^RELEASE_TYPE: +(major|minor|patch|norelease)")
 
 MAJOR = "major"
 MINOR = "minor"
 PATCH = "patch"
-NORELEASE = 'norelease'
+NORELEASE = "norelease"
 
 VALID_RELEASE_TYPES = (MAJOR, MINOR, PATCH, NORELEASE)
 
 
 def parse_release_file(contents):
-    lines = contents.split('\n')
+    lines = contents.split("\n")
     matched = RELEASE_TYPE.match(lines[0])
     if matched:
         release_type = matched.group(1)
@@ -24,34 +39,33 @@ def parse_release_file(contents):
         raise ValueError("Unknown release type")
 
     if release_type not in VALID_RELEASE_TYPES:
-        raise ValueError('Unknown release type')
+        raise ValueError("Unknown release type")
 
-    return release_type, '\n'.join(lines[2:])
+    return release_type, "\n".join(lines[2:])
 
 
 def get_release_info():
     config = load_project_config()
-    release_file = config['release_filepath']
+    release_file = config["filepaths"]["release_spec"]
 
     if not file_tracked(release_file):
-        return NORELEASE, ''
+        return NORELEASE, ""
 
     try:
-        with open(release_file, 'r') as f:
+        with open(release_file, "r") as f:
             return parse_release_file(f.read())
     except FileNotFoundError:
-        return NORELEASE, ''
+        return NORELEASE, ""
 
 
 def update_changelog(new_version, release_notes):
     config = load_project_config()
 
-    with open(config['changelog_filepath'], 'r') as f:
+    with open(config["filepaths"]["changelog"], "r") as f:
         current_contents = f.read()
 
-    heading_for_new_version = '{} - {}'.format(
-        f'v{new_version}',
-        datetime.datetime.now().date().isoformat()
+    heading_for_new_version = "{} - {}".format(
+        f"v{new_version}", datetime.datetime.now().date().isoformat()
     )
 
     border_for_new_version = "-" * len(heading_for_new_version)
@@ -68,5 +82,5 @@ def update_changelog(new_version, release_notes):
 {current_contents.strip()}
 """
 
-    with open(config['changelog_filepath'], 'w') as f:
+    with open(config["filepaths"]["changelog"], "w") as f:
         f.write(changelog_contents)

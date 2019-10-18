@@ -1,3 +1,3 @@
-[tool.releasely]
-release_filepath="release.rst"
-changelog_filepath = "docs/changes.rst"
+[tool.releasely.filepaths]
+release_spec ="release.rst"
+# changelog = "docs/changes.rst"

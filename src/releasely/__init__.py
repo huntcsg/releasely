@@ -1,4 +1,1 @@
-from . import config
-from . import git
-from . import version
-from . import release_info
+from . import config, git, release_info, tasks, version
