@@ -1,3 +1,15 @@
+.. _v0.2.5:
+
+-------------------
+v0.2.5 - 2019-10-18
+-------------------
+
+* Improved python version compatibility by removing f-strings
+
+Authors:
+
+* Hunter Senft-Grupp
+
 .. _v0.2.4:
 
 -------------------
