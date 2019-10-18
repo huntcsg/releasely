@@ -51,7 +51,7 @@ def prepare_default_branch(options):
     releasely.git.delete(config["filepaths"]["release_spec"])
     releasely.git.add_tracked()
     releasely.git.commit(
-        "Cut Release and Updated changelog: v{current_version} -> v{new_version}".format(
+        "Cut Release and Updated changelog: v{current_version} → v{new_version}".format(
             current_version=current_version, new_version=new_version
         )
     )
@@ -101,7 +101,7 @@ def prepare_minor_release_branch(options):
     releasely.git.delete(config["filepaths"]["release_spec"])
     releasely.git.add_tracked()
     releasely.git.commit(
-        "Cut Release and Updated changelog: v{current_version} -> v{new_version}".format(
+        "Cut Release and Updated changelog: v{current_version} → {new_version}".format(
             current_version=current_version, new_version=new_version
         )
     )
