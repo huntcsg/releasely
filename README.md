@@ -7,9 +7,9 @@
 Use this command to create a release specification file in the root of the repo. 
 ```shell script
 releasely release-notes
-``` 
+```
 
 Use this command to actually create and push branches
 ```shell script
 releasely prepare-release
-``` 
+```

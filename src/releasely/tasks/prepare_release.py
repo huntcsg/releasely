@@ -5,9 +5,9 @@ import releasely.git
 import releasely.release_info
 import releasely.version
 
+major_release_re = re.compile(r"^release-v\d+$")
+minor_release_re = re.compile(r"^release-v\d+\.\d+$")
 
-major_release_re = re.compile(r'^release-v\d+$')
-minor_release_re = re.compile(r'^release-v\d+\.\d+$')
 
 def augment_parser(parent_parser, subparsers):
     parser = subparsers.add_parser(
@@ -65,9 +65,7 @@ def prepare_default_branch(options):
         version_data["major"], version_data["minor"]
     )
 
-    major_release_branch_name = "release-v{}".format(
-        version_data["major"],
-    )
+    major_release_branch_name = "release-v{}".format(version_data["major"])
 
     for release_branch_name in [minor_release_branch_name, major_release_branch_name]:
         releasely.git.get_or_create_branch(release_branch_name)
@@ -124,7 +122,9 @@ def prepare_major_release_branch(options):
         return
 
     if release_type not in (releasely.release_info.MINOR, releasely.release_info.PATCH):
-        logging.warning("Only minor and patch releases are allowed on release branches.")
+        logging.warning(
+            "Only minor and patch releases are allowed on release branches."
+        )
         return
 
     current_version = releasely.version.get_current_version()
@@ -149,11 +149,11 @@ def prepare_major_release_branch(options):
         version_data["major"], version_data["minor"]
     )
 
-    major_release_branch_name = "release-v{}".format(
-        version_data["major"],
-    )
+    major_release_branch_name = "release-v{}".format(version_data["major"])
 
-    releasely.git.get_or_create_branch(minor_release_branch_name, major_release_branch_name)
+    releasely.git.get_or_create_branch(
+        minor_release_branch_name, major_release_branch_name
+    )
     if options.push:
         releasely.git.push(minor_release_branch_name)
 

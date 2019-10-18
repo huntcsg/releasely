@@ -5,5 +5,22 @@ setup(
     version="1.0.2",
     package_dir={"": "src"},
     packages=find_packages("src"),
-    entry_points={"console_scripts": ["releasely = releasely.__main__:main"]},
+    install_requires=[
+        "bumpversion",
+    ],
+    extras_require={
+        'testing': [
+            'pytest',
+            'pytest-cov',
+        ],
+        'linting': [
+            'isort',
+            'black',
+        ]
+    },
+    entry_points={
+        "console_scripts": [
+            "releasely = releasely.__main__:main"
+        ]
+    },
 )
