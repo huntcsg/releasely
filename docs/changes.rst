@@ -1,3 +1,16 @@
+.. _v1.0.5:
+
+-------------------
+v1.0.5 - 2019-10-18
+-------------------
+
+* Added MIT license
+* Updated setup.py with more metadata
+
+Authors:
+
+* Hunter Senft-Grupp
+
 .. _v1.0.4:
 
 -------------------
