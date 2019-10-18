@@ -1,3 +1,15 @@
+.. _v1.0.0:
+
+-------------------
+v1.0.0 - 2019-10-18
+-------------------
+
+* Added pushing of a "major version" branch along with a minor version branch.
+
+Authors:
+
+* Hunter Senft-Grupp
+
 .. _v0.2.6:
 
 -------------------
