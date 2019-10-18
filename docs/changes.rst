@@ -1,3 +1,15 @@
+.. _v1.0.1:
+
+-------------------
+v1.0.1 - 2019-10-18
+-------------------
+
+* Updated Readme with some usage examples.
+
+Authors:
+
+* Hunter Senft-Grupp
+
 .. _v1.0.0:
 
 -------------------
