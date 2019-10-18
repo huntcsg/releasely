@@ -48,15 +48,24 @@ def prepare_default_branch(options):
             current_version=current_version, new_version=new_version
         )
     )
-    releasely.git.tag("v{}".format(new_version))
-    release_branch_name = "release-v{}.{}".format(
+
+    tag = "v{}".format(new_version)
+    releasely.git.tag(tag)
+    if options.push:
+        releasely.git.push(tag)
+
+    minor_release_branch_name = "release-v{}.{}".format(
         version_data["major"], version_data["minor"]
     )
 
-    releasely.git.get_or_create_branch(release_branch_name)
-    if options.push:
-        releasely.git.push(release_branch_name)
-        releasely.git.push("v{}".format(new_version))
+    major_release_branch_name = "release-v{}".format(
+        version_data["major"],
+    )
+
+    for release_branch_name in [minor_release_branch_name, major_release_branch_name]:
+        releasely.git.get_or_create_branch(release_branch_name)
+        if options.push:
+            releasely.git.push(release_branch_name)
 
     releasely.git.checkout(default_branch)
 
