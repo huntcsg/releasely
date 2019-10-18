@@ -2,7 +2,7 @@ from setuptools import find_packages, setup
 
 setup(
     name="releasely",
-    version="1.0.3",
+    version="1.0.4",
     package_dir={"": "src"},
     packages=find_packages("src"),
     install_requires=[

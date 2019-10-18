@@ -1,3 +1,16 @@
+.. _v1.0.4:
+
+-------------------
+v1.0.4 - 2019-10-18
+-------------------
+
+* No code changes.
+* Fixed circleci branch specifications
+
+Authors:
+
+* Hunter Senft-Grupp
+
 .. _v1.0.3:
 
 -------------------
