@@ -1,3 +1,15 @@
+.. _v1.0.2:
+
+-------------------
+v1.0.2 - 2019-10-18
+-------------------
+
+* Updated the prepare_release process with a better arrow :) →
+
+Authors:
+
+* Hunter Senft-Grupp
+
 .. _v1.0.1:
 
 -------------------
