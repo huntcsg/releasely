@@ -1,3 +1,15 @@
+.. _v0.2.6:
+
+-------------------
+v0.2.6 - 2019-10-18
+-------------------
+
+* Push a major version branch as well as minor version. This will facilitate development on multiple major version at the same time.
+
+Authors:
+
+* Hunter Senft-Grupp
+
 .. _v0.2.5:
 
 -------------------
