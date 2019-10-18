@@ -1,3 +1,17 @@
+.. _v1.0.3:
+
+-------------------
+v1.0.3 - 2019-10-18
+-------------------
+
+* Added release tooling and circleci config
+* Added tox and basic testing
+* Added testing and linting requirements
+
+Authors:
+
+* Hunter Senft-Grupp
+
 .. _v1.0.2:
 
 -------------------
