@@ -65,22 +65,28 @@ def update_changelog(new_version, release_notes):
         current_contents = f.read()
 
     heading_for_new_version = "{} - {}".format(
-        f"v{new_version}", datetime.datetime.now().date().isoformat()
+        "v{}".format(new_version), datetime.datetime.now().date().isoformat()
     )
 
     border_for_new_version = "-" * len(heading_for_new_version)
 
-    changelog_contents = f"""\
+    changelog_contents = """\
 .. _v{new_version}:
 
 {border_for_new_version}
 {heading_for_new_version}
 {border_for_new_version}
 
-{release_notes.strip()}
+{release_notes}
 
-{current_contents.strip()}
-"""
+{current_contents}
+""".format(
+        new_version=new_version,
+        border_for_new_version=border_for_new_version,
+        heading_for_new_version=heading_for_new_version,
+        release_notes=release_notes.strip(),
+        current_contents=current_contents.strip(),
+    )
 
     with open(config["filepaths"]["changelog"], "w") as f:
         f.write(changelog_contents)

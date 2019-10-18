@@ -44,9 +44,11 @@ def prepare_default_branch(options):
     releasely.git.delete(config["filepaths"]["release_spec"])
     releasely.git.add_tracked()
     releasely.git.commit(
-        f"Cut Release and Updated changelog: v{current_version} -> v{new_version}"
+        "Cut Release and Updated changelog: v{current_version} -> v{new_version}".format(
+            current_version=current_version, new_version=new_version
+        )
     )
-    releasely.git.tag(f"v{new_version}")
+    releasely.git.tag("v{}".format(new_version))
     release_branch_name = "release-v{}.{}".format(
         version_data["major"], version_data["minor"]
     )
@@ -54,7 +56,7 @@ def prepare_default_branch(options):
     releasely.git.get_or_create_branch(release_branch_name)
     if options.push:
         releasely.git.push(release_branch_name)
-        releasely.git.push(f"v{new_version}")
+        releasely.git.push("v{}".format(new_version))
 
     releasely.git.checkout(default_branch)
 
@@ -92,13 +94,15 @@ def prepare_release_branch(options):
     releasely.git.delete(config["filepaths"]["release_spec"])
     releasely.git.add_tracked()
     releasely.git.commit(
-        f"Cut Release and Updated changelog: v{current_version} -> v{new_version}"
+        "Cut Release and Updated changelog: v{current_version} -> v{new_version}".format(
+            current_version=current_version, new_version=new_version
+        )
     )
-    releasely.git.tag(f"v{new_version}")
+    releasely.git.tag("v{}".format(new_version))
     release_branch_name = "release-v{}.{}".format(
         version_data["major"], version_data["minor"]
     )
 
     if options.push:
         releasely.git.push(release_branch_name)
-        releasely.git.push(f"v{new_version}")
+        releasely.git.push("v{}".format(new_version))
