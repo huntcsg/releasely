@@ -1,3 +1,16 @@
+.. _v0.2.4:
+
+-------------------
+v0.2.4 - 2019-10-18
+-------------------
+
+* Enabled configuration of remote name and default branch
+* Ran black on project
+
+Authors:
+
+* Hunter Senft-Grupp
+
 .. _v0.2.3:
 
 -------------------
