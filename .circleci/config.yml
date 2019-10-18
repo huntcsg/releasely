@@ -144,7 +144,7 @@ workflows:
             branches:
               only:
                 - /^master$/
-                - /^release-v[0-9]+\.\[0-9]+$/
+                - /^release-v[0-9]+$/
       - pypi:
           requires:
             - lint
@@ -153,4 +153,4 @@ workflows:
             branches:
               only:
                 # We only release on minor release branches
-                - /^release-v[0-9]+\.\[0-9]+$/
+                - /^release-v[0-9]+\.[0-9]+$/
