@@ -31,7 +31,7 @@ def main():
     parser = get_parser()
     options = parser.parse_args()
     logging.basicConfig(level=options.loglevel)
-    if hasattr(options, 'task'):
+    if hasattr(options, "task"):
         return options.task(options)
     else:
         parser.print_help()

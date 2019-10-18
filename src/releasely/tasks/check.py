@@ -63,7 +63,7 @@ def check_release_info():
     else:
         release_type, release_notes = releasely.release_info.get_release_info()
 
-        parts = release_notes.split('\n\nAuthors:\n\n')
+        parts = release_notes.split("\n\nAuthors:\n\n")
         logger.debug(repr(parts))
         notes, authorship = parts
 

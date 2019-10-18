@@ -1,6 +1,8 @@
 import collections
 import subprocess
 
+import releasely.config
+
 
 def add(*files):
     return subprocess.check_output(["git", "add"] + files).decode("utf-8").strip()
@@ -15,7 +17,8 @@ def checkout(branch):
 
 
 def push(ref):
-    return subprocess.check_output(["git", "push", "origin", ref])
+    remote = get_remote()
+    return subprocess.check_output(["git", "push", remote, ref])
 
 
 def get_refs_by_commit():
@@ -35,7 +38,10 @@ def fetch():
     return subprocess.check_output(["git", "fetch"])
 
 
-def show_ref(ref, remote="origin"):
+def show_ref(ref, remote="DEFAULT_REMOTE"):
+    if remote == "DEFAULT_REMOTE":
+        remote = get_remote()
+
     if remote:
         ref = "{}/{}".format(remote, ref)
 
@@ -47,12 +53,18 @@ def show_ref(ref, remote="origin"):
     )
 
 
-def shared_head_with_ref(reference_ref="master"):
+def shared_head_with_ref(reference_ref=None):
+    if reference_ref is None:
+        reference_ref = get_default_branch()
+
+    remote = get_remote()
+
     fetch()
     branch = rev_parse("HEAD")
-    remote_branch_ref = show_ref(branch, remote="origin")
-    master_ref = show_ref(reference_ref, remote="origin")
-    return remote_branch_ref == master_ref
+    remote_branch_ref = show_ref(branch, remote=remote)
+    default_ref = show_ref(reference_ref, remote=remote)
+
+    return remote_branch_ref == default_ref
 
 
 def commit(message):
@@ -93,7 +105,18 @@ def add_tracked():
     subprocess.check_output(["git", "add", "-u", "."])
 
 
+def get_default_branch():
+    config = releasely.config.load_project_config()
+    return config["repo"]["default_branch"]
+
+
+def get_remote():
+    config = releasely.config.load_project_config()
+    return config["repo"]["remote"]
+
+
 def get_or_create_branch(name):
+    default_branch = get_default_branch()
     branches = subprocess.check_output(["git", "branch"]).decode("utf-8").strip()
     for branch in branches.split("\n"):
         if branch.strip().strip("*").strip() == name:
@@ -102,7 +125,7 @@ def get_or_create_branch(name):
     else:
         subprocess.check_output(["git", "checkout", "-b", name]).decode("utf-8").strip()
 
-    subprocess.check_output(["git", "merge", "master", "--ff-only"])
+    subprocess.check_output(["git", "merge", default_branch, "--ff-only"])
 
 
 def file_tracked(filepath):
@@ -118,4 +141,8 @@ def file_tracked(filepath):
 
 
 def get_current_author():
-    return subprocess.check_output(["git", "config", "--get", "user.name"]).decode("utf-8").strip()
+    return (
+        subprocess.check_output(["git", "config", "--get", "user.name"])
+        .decode("utf-8")
+        .strip()
+    )
