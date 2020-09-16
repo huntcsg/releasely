@@ -1,3 +1,16 @@
+.. _v1.1.0:
+
+-------------------
+v1.1.0 - 2020-09-16
+-------------------
+
+* Added compatibility to support pip vendoring pytoml or toml
+* Updated linting and formating commands for newer version of isort
+
+Authors:
+
+* Hunter Senft-Grupp
+
 .. _v1.0.5:
 
 -------------------

@@ -7,7 +7,7 @@ with open('README.md', 'rb') as f:
 
 setup(
     name="releasely",
-    version="1.0.5",
+    version="1.1.0",
     description='A one stop shop for python library release management.',
     long_description=LONG_DESCRIPTION,
     long_description_content_type='text/markdown',
