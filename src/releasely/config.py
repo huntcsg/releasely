@@ -2,7 +2,7 @@ import copy
 import functools
 import logging
 
-from pip._vendor import pytoml
+from releasely.compat import toml_load
 
 logger = logging.getLogger(__name__)
 
@@ -16,7 +16,7 @@ default_config = {
 def load_project_config():
     try:
         with open("pyproject.toml") as f:
-            conf = pytoml.load(f).get("tool", {}).get("releasely", default_config)
+            conf = toml_load(f).get("tool", {}).get("releasely", default_config)
             for category in default_config:
                 conf.setdefault(category, type(default_config[category])())
                 if isinstance(default_config[category], dict):
