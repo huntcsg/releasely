@@ -3,6 +3,11 @@ try:
 
     toml_load = pytoml.load
 except ImportError:
-    from pip._vendor import toml
+    try:
+        from pip._vendor import toml
 
-    toml_load = toml.load
+        toml_load = toml.load
+    except ImportError:
+        from pip._vendor import tomli
+
+        toml_load = tomli.load
